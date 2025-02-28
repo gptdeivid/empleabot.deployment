@@ -12,6 +12,18 @@ if (!assistantId) {
   throw new Error('AZURE_OPENAI_ASSISTANT_ID environment variable is not set');
 }
 
+// Define tool types
+type AssistantToolType = "code_interpreter" | "retrieval";
+interface AssistantTool {
+  type: AssistantToolType;
+}
+
+// Define the tools
+const tools = [
+  { type: "code_interpreter" as const },
+  { type: "retrieval" as const }
+];
+
 // Assistant configuration
 export const assistantConfig = {
   name: "EmpleaBot",
@@ -30,9 +42,6 @@ export const assistantConfig = {
   - For job search strategies, consider the user's location and industry
   - For interview preparation, include common questions and best practices
   - Always maintain confidentiality of user information`,
-  tools: [
-    { type: "code_interpreter" },
-    { type: "retrieval" }
-  ] as const,
+  tools,
   model: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4'
 };
