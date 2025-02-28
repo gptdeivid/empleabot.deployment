@@ -1,10 +1,14 @@
 import OpenAI from 'openai';
 
 // Azure OpenAI Assistant Configuration
-export const ASSISTANT_ID = process.env.AZURE_OPENAI_ASSISTANT_ID || '';
+export let assistantId = process.env.AZURE_OPENAI_ASSISTANT_ID || '';
+
+export function setAssistantId(id: string) {
+  assistantId = id;
+}
 
 // Validate assistant ID is set
-if (!ASSISTANT_ID) {
+if (!assistantId) {
   throw new Error('AZURE_OPENAI_ASSISTANT_ID environment variable is not set');
 }
 
@@ -29,6 +33,6 @@ export const assistantConfig = {
   tools: [
     { type: "code_interpreter" },
     { type: "retrieval" }
-  ],
+  ] as const,
   model: process.env.AZURE_OPENAI_DEPLOYMENT_NAME || 'gpt-4'
 };
