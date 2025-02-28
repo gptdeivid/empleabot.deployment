@@ -37,18 +37,18 @@ jobs:
       # Debug step to check available secrets (safely)
       - name: Debug Secrets Availability
         run: |
-          echo "Checking if AZURE_STATIC_WEB_APPS_API_TOKEN is set:"
-          if [ -n "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}" ]; then
-            echo "AZURE_STATIC_WEB_APPS_API_TOKEN is set"
+          echo "Checking if deployment token is set:"
+          if [ -n "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DESERT_076A3F310 }}" ]; then
+            echo "Deployment token is set"
           else
-            echo "AZURE_STATIC_WEB_APPS_API_TOKEN is NOT set"
+            echo "Deployment token is NOT set"
           fi
 
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DESERT_076A3F310 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           app_location: "/"
@@ -70,5 +70,5 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
-          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN }}
+          azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DESERT_076A3F310 }}
           action: "close" 
