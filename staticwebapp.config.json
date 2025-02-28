@@ -1,19 +1,14 @@
 {
   "navigationFallback": {
-    "rewrite": "/_next/static/chunks/pages/index.html",
-    "exclude": ["/_next/*", "/static/*", "/images/*", "/*.{png,jpg,gif,ico,svg}"]
+    "rewrite": "/index",
+    "exclude": ["/images/*", "/*.{png,jpg,gif,ico,svg}", "/_next/*", "/static/*"]
   },
   "platform": {
     "apiRuntime": "node:20"
   },
   "routes": [
     {
-      "route": "/api/*",
-      "methods": ["GET", "POST", "PUT", "DELETE"],
-      "rewrite": "/api/index"
-    },
-    {
-      "route": "/_next/static/*",
+      "route": "/_next/*",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
       }
@@ -24,5 +19,6 @@
         "cache-control": "public, max-age=31536000, immutable"
       }
     }
-  ]
+  ],
+  "trailingSlash": "auto"
 } 

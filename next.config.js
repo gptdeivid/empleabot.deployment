@@ -14,6 +14,10 @@ const nextConfig = {
     
     return config;
   },
+  // Optimize for Azure Static Web Apps
+  poweredByHeader: false,
+  generateEtags: true,
+  compress: true,
 }
 
 module.exports = nextConfig 
