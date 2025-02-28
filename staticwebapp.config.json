@@ -1,5 +1,23 @@
 {
+  "navigationFallback": {
+    "rewrite": "/index.html",
+    "exclude": ["/_next/*", "/static/*", "/images/*", "/*.{png,jpg,gif,ico,svg}"]
+  },
   "platform": {
-    "apiRuntime": "node:18"
-  }
+    "apiRuntime": "node:20"
+  },
+  "routes": [
+    {
+      "route": "/_next/static/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/static/*",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    }
+  ]
 } 
