@@ -27,6 +27,26 @@ jobs:
           node-version: '20.11.1'
           cache: 'npm'
 
+      - name: Verify Azure OpenAI Secrets
+        run: |
+          if [ -z "${{ secrets.AZURE_OPENAI_API_KEY }}" ]; then
+            echo "Error: AZURE_OPENAI_API_KEY is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.AZURE_OPENAI_ENDPOINT }}" ]; then
+            echo "Error: AZURE_OPENAI_ENDPOINT is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}" ]; then
+            echo "Error: AZURE_OPENAI_DEPLOYMENT_NAME is not set"
+            exit 1
+          fi
+          if [ -z "${{ secrets.AZURE_OPENAI_ASSISTANT_ID }}" ]; then
+            echo "Error: AZURE_OPENAI_ASSISTANT_ID is not set"
+            exit 1
+          fi
+          echo "✓ All Azure OpenAI secrets are properly set"
+
       - name: Install dependencies
         run: npm install
         env:
