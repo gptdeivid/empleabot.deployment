@@ -50,20 +50,11 @@ jobs:
           AZURE_OPENAI_DEPLOYMENT_NAME: ${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}
           AZURE_OPENAI_ASSISTANT_ID: ${{ secrets.AZURE_OPENAI_ASSISTANT_ID }}
 
-      # Debug step to check available secrets (safely)
-      - name: Debug Secrets Availability
-        run: |
-          echo "Checking if deployment token is set:"
-          if [ -n "${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DESERT_076A3F310 }}" ]; then
-            echo "Deployment token is set"
-          else
-            echo "Deployment token is NOT set"
-          fi
-
       - name: Build And Deploy
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
         with:
+          deployment_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DESERT_076A3F310 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "upload"
           ###### Repository/Build Configurations ######
@@ -72,6 +63,7 @@ jobs:
           output_location: ".next" # Built app content directory
           app_build_command: "npm run build"
           github_id_token: ${{ steps.idtoken.outputs.result }}
+          skip_deploy_on_missing_secrets: true
           ###### End of Repository/Build Configurations ######
         env:
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
@@ -88,5 +80,6 @@ jobs:
         id: closepullrequest
         uses: Azure/static-web-apps-deploy@v1
         with:
+          deployment_token: ${{ secrets.AZURE_STATIC_WEB_APPS_API_TOKEN_PURPLE_DESERT_076A3F310 }}
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           action: "close" 
