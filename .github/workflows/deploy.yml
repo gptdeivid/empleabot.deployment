@@ -43,10 +43,9 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations ######
           app_location: "/" # App source code path
-          api_location: "" # Api source code path - optional
-          output_location: "out" # Changed from .next to out
+          api_location: "api" # Api source code path
+          output_location: ".next/standalone" # Built app content directory
           app_build_command: "npm run build"
-          is_static_export: true
           ###### End of Repository/Build Configurations ######
         env:
           AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}

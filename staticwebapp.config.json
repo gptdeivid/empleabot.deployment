@@ -1,12 +1,17 @@
 {
   "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/_next/*", "/static/*", "/images/*", "/*.{png,jpg,gif,ico,svg}", "/out/*"]
+    "rewrite": "/_next/static/chunks/pages/index.html",
+    "exclude": ["/_next/*", "/static/*", "/images/*", "/*.{png,jpg,gif,ico,svg}"]
   },
   "platform": {
     "apiRuntime": "node:20"
   },
   "routes": [
+    {
+      "route": "/api/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rewrite": "/api/index"
+    },
     {
       "route": "/_next/static/*",
       "headers": {
@@ -18,17 +23,6 @@
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
       }
-    },
-    {
-      "route": "/out/*",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "route": "/*",
-      "serve": "/index.html",
-      "statusCode": 200
     }
   ]
 } 
