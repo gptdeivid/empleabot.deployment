@@ -1,5 +1,5 @@
 import * as pdfjsLib from 'pdfjs-dist';
-import pdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs';
+import * as pdfjsWorker from 'pdfjs-dist/build/pdf.worker.mjs';
 
 // Initialize worker
 async function initializeWorker() {
