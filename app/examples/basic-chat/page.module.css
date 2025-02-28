@@ -1,0 +1,14 @@
+.main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: white;
+}
+
+.container {
+  max-width: 900px;
+  width: 90%;
+  height: 100%;
+  padding: 20px;
+}
