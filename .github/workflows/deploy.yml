@@ -44,7 +44,7 @@ jobs:
           ###### Repository/Build Configurations ######
           app_location: "/" # App source code path
           api_location: "" # Api source code path - optional
-          output_location: ".next" # Built app content directory
+          output_location: "out" # Changed from .next to out
           app_build_command: "npm run build"
           is_static_export: true
           ###### End of Repository/Build Configurations ######
