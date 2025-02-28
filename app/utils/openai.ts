@@ -16,7 +16,7 @@ export async function ensureAssistant() {
       console.log('Creating new assistant...');
       const newAssistant = await openai.beta.assistants.create({
         name: assistantConfig.name,
-        tools: assistantConfig.tools,
+        tools: [{ type: "code_interpreter" }],
         model: assistantConfig.model,
       });
       console.log('New assistant created:', newAssistant.name);
@@ -37,7 +37,7 @@ export async function ensureAssistant() {
       console.log('Updating assistant configuration...');
       const updatedAssistant = await openai.beta.assistants.update(assistantId, {
         name: assistantConfig.name,
-        tools: assistantConfig.tools,
+        tools: [{ type: "code_interpreter" }],
         model: assistantConfig.model,
       });
       console.log('Assistant updated:', updatedAssistant.name);
