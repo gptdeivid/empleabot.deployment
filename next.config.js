@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   output: 'standalone',
+  distDir: '.next',
   images: {
     unoptimized: true // Required for Azure Static Web Apps
   },
@@ -36,7 +37,11 @@ const nextConfig = {
   staticPageGenerationTimeout: 120,
   experimental: {
     optimizePackageImports: ['@next/font']
-  }
+  },
+  // Production settings
+  productionBrowserSourceMaps: true,
+  reactStrictMode: true,
+  swcMinify: true
 }
 
 module.exports = nextConfig 

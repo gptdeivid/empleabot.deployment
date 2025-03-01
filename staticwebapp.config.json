@@ -12,14 +12,18 @@
       "rewrite": "/api/index"
     },
     {
-      "route": "/*",
+      "route": "/",
       "serve": "/index.html",
       "statusCode": 200
+    },
+    {
+      "route": "/*",
+      "rewrite": "/index.html"
     }
   ],
   "navigationFallback": {
-    "rewrite": "/index.html",
-    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/api/*", "/_next/*"]
+    "rewrite": "/",
+    "exclude": ["/_next/*", "/static/*", "/api/*", "/images/*", "/*.{png,jpg,gif,ico,json}"]
   },
   "globalHeaders": {
     "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com fonts.gstatic.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; connect-src 'self' *.azurestaticapps.net *.azure.com",
