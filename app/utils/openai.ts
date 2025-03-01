@@ -4,7 +4,7 @@ import { assistantId, assistantConfig, setAssistantId } from '../assistant-confi
 // Initialize the Azure OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.AZURE_OPENAI_API_KEY || '',
-  baseURL: process.env.AZURE_OPENAI_ENDPOINT,
+  baseURL: `${process.env.AZURE_OPENAI_ENDPOINT}/openai/deployments/${process.env.AZURE_OPENAI_DEPLOYMENT_NAME}`,
   defaultQuery: { 'api-version': '2024-02-15-preview' },
   defaultHeaders: { 'api-key': process.env.AZURE_OPENAI_API_KEY }
 });
@@ -12,6 +12,10 @@ const openai = new OpenAI({
 // Function to ensure assistant exists and is up to date
 export async function ensureAssistant() {
   try {
+    if (!process.env.AZURE_OPENAI_API_KEY || !process.env.AZURE_OPENAI_ENDPOINT) {
+      throw new Error('Azure OpenAI credentials not configured');
+    }
+
     if (!assistantId) {
       console.log('Creating new assistant...');
       const newAssistant = await openai.beta.assistants.create({

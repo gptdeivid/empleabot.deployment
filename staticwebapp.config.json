@@ -1,24 +1,33 @@
 {
+  "routes": [
+    {
+      "route": "/api/*",
+      "methods": ["GET", "POST"],
+      "rewrite": "/api/index"
+    },
+    {
+      "route": "/*",
+      "serve": "/index.html",
+      "statusCode": 200
+    }
+  ],
   "navigationFallback": {
-    "rewrite": "/index",
-    "exclude": ["/images/*", "/*.{png,jpg,gif,ico,svg}", "/_next/*", "/static/*"]
+    "rewrite": "/index.html",
+    "exclude": ["/images/*.{png,jpg,gif}", "/css/*", "/api/*"]
+  },
+  "globalHeaders": {
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com; connect-src 'self' *.azurestaticapps.net *.azure.com",
+    "cache-control": "no-cache, no-store, must-revalidate"
+  },
+  "mimeTypes": {
+    ".json": "application/json",
+    ".js": "text/javascript",
+    ".css": "text/css",
+    ".html": "text/html",
+    ".ico": "image/x-icon"
   },
   "platform": {
     "apiRuntime": "node:20"
   },
-  "routes": [
-    {
-      "route": "/_next/*",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    },
-    {
-      "route": "/static/*",
-      "headers": {
-        "cache-control": "public, max-age=31536000, immutable"
-      }
-    }
-  ],
   "trailingSlash": "auto"
 } 

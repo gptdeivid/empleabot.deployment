@@ -5,7 +5,7 @@ const nextConfig = {
     unoptimized: true // Required for Azure Static Web Apps
   },
   webpack: (config) => {
-    // Deshabilitar el uso de workers para PDF.js
+    // Disable workers for PDF.js
     config.resolve.fallback = {
       ...config.resolve.fallback,
       fs: false,
@@ -18,6 +18,19 @@ const nextConfig = {
   poweredByHeader: false,
   generateEtags: true,
   compress: true,
+  // Add environment variables
+  env: {
+    AZURE_OPENAI_API_KEY: process.env.AZURE_OPENAI_API_KEY,
+    AZURE_OPENAI_ENDPOINT: process.env.AZURE_OPENAI_ENDPOINT,
+    AZURE_OPENAI_DEPLOYMENT_NAME: process.env.AZURE_OPENAI_DEPLOYMENT_NAME,
+    AZURE_OPENAI_ASSISTANT_ID: process.env.AZURE_OPENAI_ASSISTANT_ID
+  },
+  // Error handling
+  onError: async (err, req, res) => {
+    console.error('Application error:', err);
+    res.statusCode = 500;
+    res.end('Internal Server Error');
+  }
 }
 
 module.exports = nextConfig 
