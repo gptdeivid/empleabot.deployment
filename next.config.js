@@ -30,6 +30,12 @@ const nextConfig = {
     console.error('Application error:', err);
     res.statusCode = 500;
     res.end('Internal Server Error');
+  },
+  // Static resource optimization
+  optimizeFonts: true,
+  staticPageGenerationTimeout: 120,
+  experimental: {
+    optimizePackageImports: ['@next/font']
   }
 }
 
