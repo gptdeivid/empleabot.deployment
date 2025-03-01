@@ -1,15 +1,20 @@
 {
   "routes": [
     {
+      "route": "/api/assistants/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rewrite": "/api/assistants/[...path]"
+    },
+    {
+      "route": "/api/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rewrite": "/api/[...path]"
+    },
+    {
       "route": "/_next/static/*",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
       }
-    },
-    {
-      "route": "/api/*",
-      "methods": ["GET", "POST"],
-      "rewrite": "/api/index"
     },
     {
       "route": "/",
@@ -26,8 +31,11 @@
     "exclude": ["/_next/*", "/static/*", "/api/*", "/images/*", "/*.{png,jpg,gif,ico,json}"]
   },
   "globalHeaders": {
-    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com fonts.gstatic.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; connect-src 'self' *.azurestaticapps.net *.azure.com",
-    "cache-control": "no-cache, no-store, must-revalidate"
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com fonts.gstatic.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; connect-src 'self' *.azurestaticapps.net *.azure.com api.openai.com",
+    "cache-control": "no-cache, no-store, must-revalidate",
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
+    "Access-Control-Allow-Headers": "Content-Type, Authorization"
   },
   "mimeTypes": {
     ".json": "application/json",

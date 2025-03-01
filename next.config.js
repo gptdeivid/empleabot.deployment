@@ -41,7 +41,20 @@ const nextConfig = {
   // Production settings
   productionBrowserSourceMaps: true,
   reactStrictMode: true,
-  swcMinify: true
+  swcMinify: true,
+  // API configuration
+  async rewrites() {
+    return [
+      {
+        source: '/api/assistants/:path*',
+        destination: '/api/assistants/:path*'
+      },
+      {
+        source: '/api/:path*',
+        destination: '/api/:path*'
+      }
+    ]
+  }
 }
 
 module.exports = nextConfig 
