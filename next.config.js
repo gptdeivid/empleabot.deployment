@@ -46,12 +46,16 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: '/api/assistants/:path*',
-        destination: '/api/assistants/:path*'
+        source: '/api/assistants/threads/:threadId/messages',
+        destination: '/api/assistants/threads/messages'
       },
       {
-        source: '/api/:path*',
-        destination: '/api/:path*'
+        source: '/api/assistants/threads/:threadId',
+        destination: '/api/assistants/threads'
+      },
+      {
+        source: '/api/assistants/:path*',
+        destination: '/api/assistants'
       }
     ]
   }

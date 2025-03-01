@@ -1,14 +1,19 @@
 {
   "routes": [
     {
-      "route": "/api/assistants/*",
+      "route": "/api/assistants/threads/*/messages",
       "methods": ["GET", "POST", "PUT", "DELETE"],
-      "rewrite": "/api/assistants/[...path]"
+      "rewrite": "/api/assistants/threads/messages"
     },
     {
-      "route": "/api/*",
+      "route": "/api/assistants/threads/*",
       "methods": ["GET", "POST", "PUT", "DELETE"],
-      "rewrite": "/api/[...path]"
+      "rewrite": "/api/assistants/threads"
+    },
+    {
+      "route": "/api/assistants/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rewrite": "/api/assistants"
     },
     {
       "route": "/_next/static/*",
