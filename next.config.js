@@ -47,15 +47,19 @@ const nextConfig = {
     return [
       {
         source: '/api/assistants/threads/:threadId/messages',
-        destination: '/api/assistants/threads/messages'
+        destination: '/api/assistants/threads/[threadId]/messages'
       },
       {
         source: '/api/assistants/threads/:threadId',
-        destination: '/api/assistants/threads'
+        destination: '/api/assistants/threads/[threadId]'
       },
       {
-        source: '/api/assistants/:path*',
-        destination: '/api/assistants'
+        source: '/api/assistants/files/:path*',
+        destination: '/api/assistants/files'
+      },
+      {
+        source: '/api/files/:fileId',
+        destination: '/api/files/[fileId]'
       }
     ]
   }

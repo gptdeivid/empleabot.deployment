@@ -1,22 +1,38 @@
 {
   "routes": [
     {
-      "route": "/api/assistants/threads/*/messages",
+      "route": "/api/assistants/threads/:threadId/messages",
       "methods": ["GET", "POST", "PUT", "DELETE"],
-      "rewrite": "/api/assistants/threads/messages"
+      "rewrite": "/api/assistants/threads/[threadId]/messages"
     },
     {
-      "route": "/api/assistants/threads/*",
+      "route": "/api/assistants/threads/:threadId",
       "methods": ["GET", "POST", "PUT", "DELETE"],
-      "rewrite": "/api/assistants/threads"
+      "rewrite": "/api/assistants/threads/[threadId]"
     },
     {
-      "route": "/api/assistants/*",
+      "route": "/api/assistants/files/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rewrite": "/api/assistants/files"
+    },
+    {
+      "route": "/api/files/*",
+      "methods": ["GET", "POST", "PUT", "DELETE"],
+      "rewrite": "/api/files/[fileId]"
+    },
+    {
+      "route": "/api/assistants",
       "methods": ["GET", "POST", "PUT", "DELETE"],
       "rewrite": "/api/assistants"
     },
     {
-      "route": "/_next/static/*",
+      "route": "/_next/static/*.{js,css,woff2}",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
+      "route": "/static/*.{js,css,png,jpg,gif,ico,woff,woff2}",
       "headers": {
         "cache-control": "public, max-age=31536000, immutable"
       }
@@ -28,12 +44,16 @@
     },
     {
       "route": "/*",
-      "rewrite": "/index.html"
+      "serve": "/index.html"
     }
   ],
   "navigationFallback": {
-    "rewrite": "/",
-    "exclude": ["/_next/*", "/static/*", "/api/*", "/images/*", "/*.{png,jpg,gif,ico,json}"]
+    "rewrite": "/index.html",
+    "exclude": [
+      "/_next/static/*.{js,css,woff2}",
+      "/static/*.{js,css,png,jpg,gif,ico}",
+      "/api/*"
+    ]
   },
   "globalHeaders": {
     "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com fonts.gstatic.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; connect-src 'self' *.azurestaticapps.net *.azure.com api.openai.com",
