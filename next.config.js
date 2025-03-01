@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
+  output: 'export',
   distDir: '.next',
   images: {
     unoptimized: true // Required for Azure Static Web Apps
