@@ -5,6 +5,8 @@ const nextConfig = {
   images: {
     unoptimized: true // Required for Azure Static Web Apps
   },
+  // Add static file serving configuration
+  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
   webpack: (config) => {
     // Disable workers for PDF.js
     config.resolve.fallback = {

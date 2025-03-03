@@ -18,6 +18,12 @@
       }
     },
     {
+      "route": "/*.{svg,ico,png,jpg,gif}",
+      "headers": {
+        "cache-control": "public, max-age=31536000, immutable"
+      }
+    },
+    {
       "route": "/*",
       "rewrite": "/index.html"
     }
@@ -33,7 +39,7 @@
     ]
   },
   "globalHeaders": {
-    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com fonts.gstatic.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; connect-src 'self' *.azurestaticapps.net *.azure.com api.openai.com",
+    "content-security-policy": "default-src 'self' 'unsafe-inline' 'unsafe-eval' data: *.azurestaticapps.net *.azure.com fonts.gstatic.com fonts.googleapis.com; font-src 'self' fonts.gstatic.com fonts.googleapis.com; font-src-elem 'self' fonts.gstatic.com fonts.googleapis.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com; connect-src 'self' *.azurestaticapps.net *.azure.com api.openai.com; storage-src 'self' fonts.gstatic.com",
     "cache-control": "no-cache, no-store, must-revalidate",
     "Access-Control-Allow-Origin": "*",
     "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
