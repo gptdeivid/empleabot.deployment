@@ -6,7 +6,8 @@ const nextConfig = {
     unoptimized: true // Required for Azure Static Web Apps
   },
   // Add static file serving configuration
-  assetPrefix: process.env.NODE_ENV === 'production' ? '.' : '',
+  assetPrefix: process.env.NODE_ENV === 'production' ? '/_next' : '',
+  basePath: '',
   webpack: (config) => {
     // Disable workers for PDF.js
     config.resolve.fallback = {

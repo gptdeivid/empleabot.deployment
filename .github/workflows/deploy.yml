@@ -63,7 +63,7 @@ jobs:
           action: "upload"
           ###### Repository/Build Configurations ######
           app_location: "/" # App source code path
-          output_location: ".next" # Built app content directory
+          output_location: ".next/standalone" # Built app content directory
           app_build_command: "npm run build"
           ###### End of Repository/Build Configurations ######
         env:
@@ -73,6 +73,7 @@ jobs:
           AZURE_OPENAI_ASSISTANT_ID: ${{ secrets.AZURE_OPENAI_ASSISTANT_ID }}
           NODE_VERSION: '20'
           NEXT_TELEMETRY_DISABLED: '1'
+          NODE_ENV: 'production'
 
   close_pull_request_job:
     if: github.event_name == 'pull_request' && github.event.action == 'closed'
