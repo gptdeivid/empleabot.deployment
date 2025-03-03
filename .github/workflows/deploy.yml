@@ -27,33 +27,16 @@ jobs:
           node-version: '20.11.1'
           cache: 'npm'
 
-      - name: Verify Azure OpenAI Secrets
+      - name: Create env file
         run: |
-          if [ -z "${{ secrets.AZURE_OPENAI_API_KEY }}" ]; then
-            echo "Error: AZURE_OPENAI_API_KEY is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.AZURE_OPENAI_ENDPOINT }}" ]; then
-            echo "Error: AZURE_OPENAI_ENDPOINT is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}" ]; then
-            echo "Error: AZURE_OPENAI_DEPLOYMENT_NAME is not set"
-            exit 1
-          fi
-          if [ -z "${{ secrets.AZURE_OPENAI_ASSISTANT_ID }}" ]; then
-            echo "Error: AZURE_OPENAI_ASSISTANT_ID is not set"
-            exit 1
-          fi
-          echo "✓ All Azure OpenAI secrets are properly set"
+          echo "AZURE_OPENAI_API_KEY=${{ secrets.AZURE_OPENAI_API_KEY }}" > .env
+          echo "AZURE_OPENAI_ENDPOINT=${{ secrets.AZURE_OPENAI_ENDPOINT }}" >> .env
+          echo "AZURE_OPENAI_DEPLOYMENT_NAME=${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}" >> .env
+          echo "AZURE_OPENAI_ASSISTANT_ID=${{ secrets.AZURE_OPENAI_ASSISTANT_ID }}" >> .env
+          echo "NODE_ENV=production" >> .env
 
       - name: Install dependencies
         run: npm install
-        env:
-          AZURE_OPENAI_API_KEY: ${{ secrets.AZURE_OPENAI_API_KEY }}
-          AZURE_OPENAI_ENDPOINT: ${{ secrets.AZURE_OPENAI_ENDPOINT }}
-          AZURE_OPENAI_DEPLOYMENT_NAME: ${{ secrets.AZURE_OPENAI_DEPLOYMENT_NAME }}
-          AZURE_OPENAI_ASSISTANT_ID: ${{ secrets.AZURE_OPENAI_ASSISTANT_ID }}
 
       - name: Build And Deploy
         id: builddeploy

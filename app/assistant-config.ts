@@ -1,15 +1,15 @@
 import OpenAI from 'openai';
 
 // Azure OpenAI Assistant Configuration
-export let assistantId = process.env.AZURE_OPENAI_ASSISTANT_ID || '';
+export let assistantId = '';
 
 export function setAssistantId(id: string) {
   assistantId = id;
 }
 
-// Validate assistant ID is set
-if (!assistantId) {
-  throw new Error('AZURE_OPENAI_ASSISTANT_ID environment variable is not set');
+// Initialize assistantId if available
+if (typeof process !== 'undefined' && process.env.AZURE_OPENAI_ASSISTANT_ID) {
+  assistantId = process.env.AZURE_OPENAI_ASSISTANT_ID;
 }
 
 // Define the tools with the exact types expected by Azure OpenAI
